@@ -23,3 +23,5 @@ class adminconsole:
         pass
 obj=adminconsole()
 obj.create_emp_account()
+"""create employee"""
+
