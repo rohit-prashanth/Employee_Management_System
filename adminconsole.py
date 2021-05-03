@@ -1,4 +1,5 @@
-#from database import database
+from data_base import Database
+from validation import validation
 class adminconsole:
     def create_emp_account(self):
         self.f_name=input("enter first name")
@@ -11,17 +12,15 @@ class adminconsole:
         self.join_date=input("enter joining date")
         self.pan_id=input("ener pancard number")
         self.leave_balance=int(input("enter leave balance days"))
-        dic={"f_name":self.f_name,"l_name":self.l_name,"username":self.username,"email_id":self.email_id,"password":self.password,
-             "emp_salary":self.emp_salary,"emp_pd_no":self.emp_pf_no,"join_date":self.join_date,"pan_id":self.pan_id,"leave_balance":self.leave_balance,}
-        print(dic)
-        #database().insert_row("Emp_Creation_table",dic)
+        column={"first_name":self.f_name,"last_name":self.l_name,"username":self.username,"email_id":self.email_id,"password":self.password,
+             "emp_salary":self.emp_salary,"emp_pf_no":self.emp_pf_no,"join_date":self.join_date,"pan_no":self.pan_id,"leave_balance":self.leave_balance,}
+        Database().insert_row("Emp_Creation_Table",column)
     def list_emp_details(self):
-        pass
+        Database().emp_detailes()
     def emp_leave_request(self):
         pass
     def emp_account_del(self):
-        pass
+        Database().emp_delete()
 obj=adminconsole()
 obj.create_emp_account()
 """create employee"""
-
