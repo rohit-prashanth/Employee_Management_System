@@ -1,6 +1,6 @@
 import datetime
 import re
-from data_base import Database
+from Data_base import Database
 #Database().FUNCTION NAME
 
 class Validation:
@@ -18,41 +18,44 @@ class Validation:
                 print("invalid email")
                 continue
 
+
     def emp_useridvalidation(self):
-        db = Database().read_table('Emp_Creation_Table')
-        # usinpt=input("enter userid")
-        lst = []
+        db=Database().read_table('Emp_Creation_Table')
+        #usinpt=input("enter userid")
+        lst=[]
         for i in db:
             lst.append(i[2])
         while True:
             usinpt = input("enter userid")
             for i in lst:
-                if i == usinpt:
+                if i==usinpt:
                     print("unique id")
                     continue
                 else:
                     return usinpt
                     break
 
+
+
+
     def emp_usernamevalidation(self):
-        while True:
-            inpt = input("enter ur firstname::-")
-            inpt1 = input("enter ur last name::-")
-            if inpt.isalpha() and inpt1.isalpha():
-                return inpt, inpt1
+       while True:
+           inpt= input("enter ur firstname::-")
+           inpt1 = input("enter ur last name::-")
+           if inpt.isalpha() and inpt1.isalpha():
+                return inpt,inpt1
                 break
-            else:
+           else:
                 print("invalid username")
                 continue
-
-obj = Validation()
+obj=Validation()
 obj.emp_emailvalidation()
 
 
 
 
 
-# password length be min 8 char and max length is 16 in that upper&lower cases &special symbols and numbers
+# password length be min 8 char and max length is 16 in that upper&lower cases &special symbols
 #def changepassword():
 
 
