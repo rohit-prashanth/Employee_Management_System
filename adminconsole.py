@@ -1,11 +1,10 @@
 from Data_base import Database
-from validation import validation
+from validation import Validation
 class Adminconsole:
     def create_emp_account(self):
-        self.f_name=input("enter first name")
-        self.l_name=input("enter last name")
-        self.username=input("create user name")
-        self.email_id=Validation().emp_usernamevalidation()
+        self.username=Validation().emp_usernamevalidation()
+        self.userid=Validation().emp_useridvalidation()
+        self.email_id=Validation().emp_emailvalidation()
         self.password=input("enter password")
         self.emp_salary=float(input("enter employee salary"))
         self.emp_pf_no=input("enter pf no")
@@ -19,9 +18,9 @@ class Adminconsole:
     def list_emp_details(self):
         username=input("enter username to know the employee details")
         if username:
-            Database().read_table("emp_creation_table",username)
+            print(Database().read_table("emp_creation_table",username))
         else:
-            Database().read_table("emp_creation_table")
+            print(Database().read_table("emp_creation_table"))
     def emp_leave_request(self):
         Database().read_table("Leave_Request_Table")
         self.username=input("enter username")
@@ -30,8 +29,8 @@ class Adminconsole:
     def emp_account_del(self):
         del_row=input("enter username to delete")
         Database().delete_row("emp_creation_table",del_row)
-#obj=adminconsole()
+obj=Adminconsole()
 #obj.create_emp_account()
 #obj.emp_account_del()
-#obj.list_emp_details()
+obj.list_emp_details()
 #obj.emp_leave_request()

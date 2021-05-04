@@ -24,12 +24,12 @@ class Database:
         if username == None:
             query = f"select * from {table_name}"
             cur.execute(query)
-            print(cur.fetchall())
+            return cur.fetchall()
             conn.commit()
         else:
             query = f"select * from {table_name} where username = '{username}'"
             cur.execute(query)
-            print(cur.fetchall())
+            return cur.fetchall()
             conn.commit()  
 
     def update_table(self,table_name,username,column,data):
