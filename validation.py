@@ -5,11 +5,12 @@ from data_base import Database
 
 class Validation:
 
-    def emp_emailvalidation():
+    def emp_emailvalidation(self):
         # ref='^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,20}$'
         ref = '\w[a-z_.]\D*@ojas-it[.]com'
         while True:
             email = input("enter ur email::-")
+            re.search(ref,email)
             if re.search(ref,email):
                 return email
                 break
@@ -17,44 +18,41 @@ class Validation:
                 print("invalid email")
                 continue
 
-
-    def emp_useridvalidation():
-        db=Database().read_table('Emp_Creation_Table')
-        #usinpt=input("enter userid")
-        lst=[]
+    def emp_useridvalidation(self):
+        db = Database().read_table('Emp_Creation_Table')
+        # usinpt=input("enter userid")
+        lst = []
+        for i in db:
+            lst.append(i[2])
         while True:
             usinpt = input("enter userid")
-            for i in db:
-                lst.append(i[2])
-
             for i in lst:
-                if db==usinpt:
+                if i == usinpt:
                     print("unique id")
-                    break
-                else:
-                    print("not unique")
                     continue
+                else:
+                    return usinpt
+                    break
 
-
-
-
-    def emp_usernamevalidation():
-
-       while True:
-           inpt= input("enter ur firstname::-")
-           inpt1 = input("enter ur last name::-")
-           if inpt.isalpha() and inpt1.isalpha():
-                return inpt,inpt1
+    def emp_usernamevalidation(self):
+        while True:
+            inpt = input("enter ur firstname::-")
+            inpt1 = input("enter ur last name::-")
+            if inpt.isalpha() and inpt1.isalpha():
+                return inpt, inpt1
                 break
-           else:
+            else:
                 print("invalid username")
                 continue
 
+obj = Validation()
+obj.emp_emailvalidation()
 
 
 
 
-# password length be min 8 char and max length is 16 in that upper&lower cases &special symbols
+
+# password length be min 8 char and max length is 16 in that upper&lower cases &special symbols and numbers
 #def changepassword():
 
 
