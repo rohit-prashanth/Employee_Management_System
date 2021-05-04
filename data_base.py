@@ -26,14 +26,6 @@ class Database:
         if username == None:
             query = f"select * from {table_name}"
             cur.execute(query)
-<<<<<<< HEAD
-            return cur.fetchall()
-            conn.commit()
-        else:
-            query = f"select * from {table_name} where username = '{username}'"
-            cur.execute(query)
-            return cur.fetchall()
-=======
             conn.commit()
             return cur.fetchall()
             
@@ -41,7 +33,6 @@ class Database:
         else:
             query = f"select * from {table_name} where username = '{username}'"
             cur.execute(query)
->>>>>>> origin/main
             conn.commit()  
             return cur.fetchall()
 
@@ -65,16 +56,3 @@ class Database:
 # column3 = {'first_name':'sample','last_name':'123','username':'vinod','email_id':'sample','password':'123456','emp_salary':10000,'emp_pf_no':12355,'join_Date':'03-02-2021','pan_no':'ADGJ4568','leave_balance':2}  
 obj = Database()
 # obj.create_table()  
-
-# obj.insert_row('Leave_Request_Table',column1)  
-# obj.insert_row('Emp_Creation_Table',column2)
-# obj.insert_row('Emp_Creation_Table',column3)
-obj.read_table('Emp_Creation_Table')
-
-# obj.read_table('Leave_Request_Table')
-# obj.read_table('Emp_Creation_Table',username = 'lol')
-# obj.update_table('Emp_Creation_Table','lol','emp_salary','25000')
-# obj.update_table('Leave_Request_Table','lol','approval','Pending')
-# obj.delete_row('Emp_Creation_Table','sample123')
-# obj.delete_row('Leave_Request_Table','lol')
-
