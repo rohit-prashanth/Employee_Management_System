@@ -1,8 +1,11 @@
 import pymysql
+
 conn = pymysql.connect(user='root',password='',host="localhost")
+
 cur = conn.cursor()
 cur.execute("create database if not exists Employee_leave_management_system")
 cur.execute("use Employee_leave_management_system")
+
 
 class Database:                
     def create_table(self):       
@@ -33,15 +36,18 @@ class Database:
             conn.commit()  
             return cur.fetchall()
 
+
     def update_table(self,table_name,username,column,data):
         query = f"update {table_name} set {column} = '{data}' where username='{username}'"
         cur.execute(query)
         conn.commit()
 
     def delete_row(self,table_name,username):
+
         qurey = f"delete from {table_name} where username = '{username}' "
         cur.execute(qurey)
         conn.commit()
+
 
 
 
@@ -55,6 +61,7 @@ obj = Database()
 # obj.insert_row('Emp_Creation_Table',column2)
 # obj.insert_row('Emp_Creation_Table',column3)
 obj.read_table('Emp_Creation_Table')
+
 # obj.read_table('Leave_Request_Table')
 # obj.read_table('Emp_Creation_Table',username = 'lol')
 # obj.update_table('Emp_Creation_Table','lol','emp_salary','25000')
