@@ -1,11 +1,11 @@
 from Data_base import Database
-#from validation import validation
-class adminconsole:
+from validation import validation
+class Adminconsole:
     def create_emp_account(self):
         self.f_name=input("enter first name")
         self.l_name=input("enter last name")
         self.username=input("create user name")
-        self.email_id=input("enter email address")
+        self.email_id=Validation().emp_usernamevalidation()
         self.password=input("enter password")
         self.emp_salary=float(input("enter employee salary"))
         self.emp_pf_no=input("enter pf no")
