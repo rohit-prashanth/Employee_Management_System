@@ -26,7 +26,6 @@ class Database:
             cur.execute(query)
             print(cur.fetchall())
             conn.commit()
-            
         else:
             query = f"select * from {table_name} where username = '{username}'"
             cur.execute(query)
