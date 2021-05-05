@@ -1,6 +1,11 @@
 import datetime
 import re
 from data_base import Database
+<<<<<<< HEAD
+=======
+from getpass import getpass
+from string import punctuation
+>>>>>>> 9d73167d3b8913113e15d83db8e18255f1767714
 #Database().FUNCTION NAME
 
 class Validation:
@@ -18,44 +23,78 @@ class Validation:
                 print("invalid email")
                 continue
 
-
     def emp_useridvalidation(self):
-        db=Database().read_table('Emp_Creation_Table')
-        #usinpt=input("enter userid")
-        lst=[]
+        db = Database().read_table('Emp_Creation_Table')
+        # usinpt=input("enter userid")
+        lst = []
         for i in db:
             lst.append(i[2])
         while True:
             usinpt = input("enter userid")
             for i in lst:
-                if i==usinpt:
+                if i == usinpt:
                     print("unique id")
                     continue
                 else:
                     return usinpt
                     break
 
-
-
-
     def emp_usernamevalidation(self):
-       while True:
-           inpt= input("enter ur firstname::-")
-           inpt1 = input("enter ur last name::-")
-           if inpt.isalpha() and inpt1.isalpha():
-                return inpt,inpt1
+        while True:
+            inpt = input("enter ur firstname::-")
+            inpt1 = input("enter ur last name::-")
+            if inpt.isalpha() and inpt1.isalpha():
+                return inpt, inpt1
                 break
-           else:
+            else:
                 print("invalid username")
                 continue
-obj=Validation()
-obj.emp_emailvalidation()
+
+    def emp_passwordvalidation(password):
+
+        while True:
+            password = getpass("enter u r password::-")
+
+            if ' ' in password:
+                print( 'there is a space in password')
+                continue
+
+            if len(password) not in range(8,17):
+                print('password should between in min 8 & max 16 characters')
+                continue
+
+            special_chars=[True for x in password if x in punctuation]
+            if len(special_chars)==0:
+                print( 'your password should have one special character')
+                continue
+
+            nums=any(x.isdigit() for x in password)
+            if not  nums:
+                print( "you should have atleast 1 digit in your password")
+                continue
+
+            else:
+
+                return password
+                break
+        print(password)
 
 
 
 
 
-# password length be min 8 char and max length is 16 in that upper&lower cases &special symbols
+
+
+
+obj = Validation()
+print(obj.emp_passwordvalidation())
+
+
+
+
+
+
+# password length be min 8 char and max length is 16 in that upper&lower cases &special symbols and numbers
 #def changepassword():
 
 

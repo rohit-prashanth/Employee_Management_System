@@ -5,7 +5,7 @@ class Adminconsole:
         self.username=Validation().emp_usernamevalidation()
         self.userid=Validation().emp_useridvalidation()
         self.email_id=Validation().emp_emailvalidation()
-        self.password=input("enter password")
+        self.password=Validation().emp_passwordvalidation()
         self.emp_salary=float(input("enter employee salary"))
         self.emp_pf_no=input("enter pf no")
         self.join_date=input("enter joining date")
