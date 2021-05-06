@@ -1,12 +1,31 @@
-class LoginConsole:
-    def request_leave():
-        pass
+import Database from data_base
+import validation 
 
+
+class LoginConsole:
     def emp_search(emp_username):
-        pass
+        Data=Database().read_table('Emp_Creation_Table',username = emp_username)
+        print(Data[0],Data[1],Data[2],Data[7])
+        
     
 
     def change_password(emp_username):
-        pass
+
+        
     
                 
+    def request_leave(self):
+        import pymysql
+        conn = pymysql.connect(user='root',password='root',host="localhost")
+        cur = conn.cursor()
+        cur.execute("use Employee_leave_management_system")
+        print("leave request for employee")
+        self.username=input("enter username")
+        self.from_date=input("enter from date")
+        self.to_date=input("enter to date")
+        self.no_of_days=int(input("enter number of days"))
+        self.q=f"select leave_balance from emp_creation_table where username='{self.username}'"
+        self.leave_balance=cur.execute(self.q)
+        dic={"username":self.username,"from_date":self.from_date,"to_date":self.to_date,"no_of_days":self.no_of_days,"leave_balance":self.leave_balance,"status":"pending"}
+        print(dic)
+        Database().insert_row("Leave_Request_Table",dic)
