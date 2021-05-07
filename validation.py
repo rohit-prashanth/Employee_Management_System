@@ -1,11 +1,8 @@
 import datetime
 import re
 from data_base import Database
-<<<<<<< HEAD
-=======
-from getpass import getpass
+import getpass
 from string import punctuation
->>>>>>> 9d73167d3b8913113e15d83db8e18255f1767714
 #Database().FUNCTION NAME
 
 class Validation:
@@ -14,7 +11,7 @@ class Validation:
         # ref='^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,20}$'
         ref = '\w[a-z_.]\D*@ojas-it[.]com'
         while True:
-            email = input("enter ur email::-")
+            email = input("enter ur email::-",None)
             re.search(ref,email)
             if re.search(ref,email):
                 return email
@@ -50,11 +47,9 @@ class Validation:
                 print("invalid username")
                 continue
 
-    def emp_passwordvalidation(password):
-
+    def emp_passwordvalidation(self):
         while True:
-            password = getpass("enter u r password::-")
-
+            password = getpass.getpass(prompt="enter u r password::-",stream=None)
             if ' ' in password:
                 print( 'there is a space in password')
                 continue
@@ -77,17 +72,52 @@ class Validation:
 
                 return password
                 break
-        print(password)
 
-
-
-
-
-
-
-
+    def emp_salaryvalidation(self):
+        while True:
+            try:
+                salary = float(input("enter salary"))
+                if salary:
+                    return salary
+            except:
+                print("enter valid salary ")
+                continue
+    def emp_pfno_validation(self):
+        while True:
+            pfno=input("enter pf no")
+            if pfno.isalpha():
+                continue
+            if pfno.isnumeric():
+                continue
+            if pfno.isalnum():
+                return pfno
+            else:
+                continue
+    def date_validation(self):
+        while True:
+            date_string = input("enter date in YYYY-MM-DD format")
+            format = "%Y-%m-%d"
+            try:
+                if datetime.datetime.strptime(date_string, format):
+                    return datetime.datetime.strptime(date_string, format)
+                    break
+            except:
+                print("Incorrect data format, should be YYYY-MM-DD")
+                continue
+    def panid_validation(self):
+        while True:
+            pfno=input("enter pan no")
+            if pfno.isalpha():
+                continue
+            if pfno.isnumeric():
+                continue
+            if pfno.isalnum():
+                return pfno
+            else:
+                continue
+        
 obj = Validation()
-print(obj.emp_passwordvalidation())
+obj.date_validation()
 
 
 

@@ -1,6 +1,6 @@
 import pymysql
 
-conn = pymysql.connect(user='root',password='',host="localhost")
+conn = pymysql.connect(user='root',password='root',host="localhost")
 
 cur = conn.cursor()
 cur.execute("create database if not exists Employee_leave_management_system")

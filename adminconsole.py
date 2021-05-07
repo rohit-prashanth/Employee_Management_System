@@ -6,11 +6,11 @@ class Adminconsole:
         self.userid=Validation().emp_useridvalidation()
         self.email_id=Validation().emp_emailvalidation()
         self.password=Validation().emp_passwordvalidation()
-        self.emp_salary=float(input("enter employee salary"))
-        self.emp_pf_no=input("enter pf no")
-        self.join_date=input("enter joining date")
-        self.pan_id=input("ener pancard number")
-        self.leave_balance=int(input("enter leave balance days"))
+        self.emp_salary=Validation().emp_salaryvalidation()
+        self.emp_pf_no=Validation().emp_pfno_validation()
+        self.join_date=Validation.date_validation()
+        self.pan_id=Validation.panid_validation()
+        self.leave_balance=6
         dic={"first_name":self.f_name,"last_name":self.l_name,"username":self.username,"email_id":self.email_id,"password":self.password,
              "emp_salary":self.emp_salary,"emp_pf_no":self.emp_pf_no,
              "join_Date":self.join_date,"pan_no":self.pan_id,"leave_balance":self.leave_balance,}
