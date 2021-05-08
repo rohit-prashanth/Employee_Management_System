@@ -8,10 +8,10 @@ class Adminconsole:
         self.password=Validation().emp_passwordvalidation()
         self.emp_salary=Validation().emp_salaryvalidation()
         self.emp_pf_no=Validation().emp_pfno_validation()
-        self.join_date=Validation.date_validation()
-        self.pan_id=Validation.panid_validation()
+        self.join_date=Validation().date_validation()
+        self.pan_id=Validation().panid_validation()
         self.leave_balance=6
-        dic={"first_name":self.f_name,"last_name":self.l_name,"username":self.username,"email_id":self.email_id,"password":self.password,
+        dic={"first_name":self.username[0],"last_name":self.username[1],"username":self.userid,"email_id":self.email_id,"password":self.password,
              "emp_salary":self.emp_salary,"emp_pf_no":self.emp_pf_no,
              "join_Date":self.join_date,"pan_no":self.pan_id,"leave_balance":self.leave_balance,}
         Database().insert_row("Emp_Creation_Table",dic)
@@ -29,8 +29,8 @@ class Adminconsole:
     def emp_account_del(self):
         del_row=input("enter username to delete")
         Database().delete_row("emp_creation_table",del_row)
-obj=Adminconsole()
+#obj=Adminconsole()
 #obj.create_emp_account()
 #obj.emp_account_del()
-obj.list_emp_details()
+#obj.list_emp_details()
 #obj.emp_leave_request()

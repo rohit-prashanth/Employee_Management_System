@@ -11,7 +11,7 @@ class Validation:
         # ref='^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,20}$'
         ref = '\w[a-z_.]\D*@ojas-it[.]com'
         while True:
-            email = input("enter ur email::-",None)
+            email = input("enter ur email::-")
             re.search(ref,email)
             if re.search(ref,email):
                 return email
@@ -32,10 +32,9 @@ class Validation:
                 if i == usinpt:
                     print("unique id")
                     continue
-                else:
-                    return usinpt
-                    break
-
+            else:
+                return usinpt
+                break
     def emp_usernamevalidation(self):
         while True:
             inpt = input("enter ur firstname::-")
@@ -49,7 +48,7 @@ class Validation:
 
     def emp_passwordvalidation(self):
         while True:
-            password = getpass.getpass(prompt="enter u r password::-",stream=None)
+            password = input("enter u r password::-")
             if ' ' in password:
                 print( 'there is a space in password')
                 continue
@@ -69,7 +68,6 @@ class Validation:
                 continue
 
             else:
-
                 return password
                 break
 
@@ -115,9 +113,25 @@ class Validation:
                 return pfno
             else:
                 continue
-        
-obj = Validation()
-obj.date_validation()
+class Loginconsole_validations:
+    def username_validation(self):
+        while True:
+            username=input("enter username")
+            password=input("enter password")
+            us_data=Database().read_table("Emp_Creation_Table")
+            dic={}
+            for i in us_data:
+                dic[i[2]]=i[4]
+            if username in dic.keys():
+                if password == dic[username]:
+                    print("success full")
+                else:
+                    print("entered credentials are wrong")
+                    continue
+            else:
+                print("entered credentials are wrong")
+#obj = Loginconsole_validations()
+#obj.username_validation()
 
 
 
