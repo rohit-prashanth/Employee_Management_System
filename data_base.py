@@ -47,12 +47,14 @@ class Database:
         qurey = f"delete from {table_name} where username = '{username}' "
         cur.execute(qurey)
         conn.commit()
-
-
-
+    def particular_col_details(self,table_name,username,column):
+        query = f"select {column} from {table_name} where username = '{username}'"
+        cur.execute(query)
+        conn.commit()
+        return cur.fetchall()
 
 # column1 = {'username':'lol','from_date':'05-04-2021','to_date':'07-04-2021','no_of_days':'2','approval':'Pending'}  
 # column2 = {'first_name':'sample','last_name':'123','username':'lol','email_id':'sample','password':'123456','emp_salary':10000,'emp_pf_no':12355,'join_Date':'03-02-2021','pan_no':'ADGJ4568','leave_balance':2}  
 # column3 = {'first_name':'sample','last_name':'123','username':'vinod','email_id':'sample','password':'123456','emp_salary':10000,'emp_pf_no':12355,'join_Date':'03-02-2021','pan_no':'ADGJ4568','leave_balance':2}  
-obj = Database()
-# obj.create_table()  
+#obj = Database()
+#obj.particular_col_details("Emp_Creation_Table",'vinod7967','email_id')
