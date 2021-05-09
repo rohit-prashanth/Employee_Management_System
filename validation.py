@@ -130,8 +130,45 @@ class Loginconsole_validations:
                     continue
             else:
                 print("entered credentials are wrong")
-#obj = Loginconsole_validations()
-#obj.username_validation()
+    def fromdate_validation(self):
+        global from_date
+        from_date=""
+        while True:
+            date_string = input("enter from date in YYYY-MM-DD format")
+            format = "%Y-%m-%d"
+            date=datetime.datetime.now()
+            try:
+                if datetime.datetime.strptime(date_string, format):
+                    if str(datetime.datetime.strptime(date_string, format))[0:10]>=str(date)[0:10]:
+                        from_date=from_date+str(datetime.datetime.strptime(date_string, format))
+                        return datetime.datetime.strptime(date_string, format)
+                        break
+                    else:
+                        print("enter valid date,it should be more than the current date")
+                        continue    
+            except:
+                print("Incorrect data format, should be YYYY-MM-DD")
+                continue
+    
+    def todate_validation(self):
+        while True:
+            date_string = input("enter to date in YYYY-MM-DD format")
+            format = "%Y-%m-%d"
+            try:
+                if datetime.datetime.strptime(date_string, format):
+                    if from_date[0:10]<=str(datetime.datetime.strptime(date_string, format))[0:10]:
+                        return datetime.datetime.strptime(date_string, format)
+                        break
+                    else:
+                        print("enter valid date,it should be more than the current date")
+                        continue
+            except:
+                print("Incorrect data format, should be YYYY-MM-DD")
+                continue
+                    
+obj = Loginconsole_validations()
+obj.fromdate_validation()
+obj.todate_validation()
 
 
 

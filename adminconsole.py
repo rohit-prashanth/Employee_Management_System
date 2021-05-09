@@ -29,8 +29,8 @@ class Adminconsole:
     def emp_account_del(self):
         del_row=input("enter username to delete")
         Database().delete_row("emp_creation_table",del_row)
-#obj=Adminconsole()
-#obj.create_emp_account()
+obj=Adminconsole()
+obj.create_emp_account()
 #obj.emp_account_del()
 #obj.list_emp_details()
 #obj.emp_leave_request()
