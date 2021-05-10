@@ -6,14 +6,8 @@ class LoginConsole:
     def emp_search(emp_username):
         Data=Database().read_table('Emp_Creation_Table',username = emp_username)
         print(Data[0],Data[1],Data[2],Data[7])
-        
-    
-
     def change_password(emp_username):
-
-        
-    
-                
+        pass
     def request_leave(self):
         import pymysql
         conn = pymysql.connect(user='root',password='root',host="localhost")

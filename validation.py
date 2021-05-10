@@ -1,7 +1,7 @@
 import datetime
 import re
 from data_base import Database
-from getpass import getpass
+import getpass
 from string import punctuation
 #Database().FUNCTION NAME
 
@@ -32,10 +32,9 @@ class Validation:
                 if i == usinpt:
                     print("unique id")
                     continue
-                else:
-                    return usinpt
-                    break
-
+            else:
+                return usinpt
+                break
     def emp_usernamevalidation(self):
         while True:
             inpt = input("enter ur firstname::-")
@@ -47,11 +46,9 @@ class Validation:
                 print("invalid username")
                 continue
 
-    def emp_passwordvalidation(password):
-
+    def emp_passwordvalidation(self):
         while True:
-            password = getpass("enter u r password::-")
-
+            password = input("enter u r password::-")
             if ' ' in password:
                 print( 'there is a space in password')
                 continue
@@ -71,20 +68,107 @@ class Validation:
                 continue
 
             else:
-
                 return password
                 break
-        print(password)
 
-
-
-
-
-
-
-
-obj = Validation()
-print(obj.emp_passwordvalidation())
+    def emp_salaryvalidation(self):
+        while True:
+            try:
+                salary = float(input("enter salary"))
+                if salary:
+                    return salary
+            except:
+                print("enter valid salary ")
+                continue
+    def emp_pfno_validation(self):
+        while True:
+            pfno=input("enter pf no")
+            if pfno.isalpha():
+                continue
+            if pfno.isnumeric():
+                continue
+            if pfno.isalnum():
+                return pfno
+            else:
+                continue
+    def date_validation(self):
+        while True:
+            date_string = input("enter date in YYYY-MM-DD format")
+            format = "%Y-%m-%d"
+            try:
+                if datetime.datetime.strptime(date_string, format):
+                    return datetime.datetime.strptime(date_string, format)
+                    break
+            except:
+                print("Incorrect data format, should be YYYY-MM-DD")
+                continue
+    def panid_validation(self):
+        while True:
+            pfno=input("enter pan no")
+            if pfno.isalpha():
+                continue
+            if pfno.isnumeric():
+                continue
+            if pfno.isalnum():
+                return pfno
+            else:
+                continue
+class Loginconsole_validations:
+    def username_validation(self):
+        while True:
+            username=input("enter username")
+            password=input("enter password")
+            us_data=Database().read_table("Emp_Creation_Table")
+            dic={}
+            for i in us_data:
+                dic[i[2]]=i[4]
+            if username in dic.keys():
+                if password == dic[username]:
+                    print("success full")
+                else:
+                    print("entered credentials are wrong")
+                    continue
+            else:
+                print("entered credentials are wrong")
+    def fromdate_validation(self):
+        global from_date
+        from_date=""
+        while True:
+            date_string = input("enter from date in YYYY-MM-DD format")
+            format = "%Y-%m-%d"
+            date=datetime.datetime.now()
+            try:
+                if datetime.datetime.strptime(date_string, format):
+                    if str(datetime.datetime.strptime(date_string, format))[0:10]>=str(date)[0:10]:
+                        from_date=from_date+str(datetime.datetime.strptime(date_string, format))
+                        return datetime.datetime.strptime(date_string, format)
+                        break
+                    else:
+                        print("enter valid date,it should be more than the current date")
+                        continue    
+            except:
+                print("Incorrect data format, should be YYYY-MM-DD")
+                continue
+    
+    def todate_validation(self):
+        while True:
+            date_string = input("enter to date in YYYY-MM-DD format")
+            format = "%Y-%m-%d"
+            try:
+                if datetime.datetime.strptime(date_string, format):
+                    if from_date[0:10]<=str(datetime.datetime.strptime(date_string, format))[0:10]:
+                        return datetime.datetime.strptime(date_string, format)
+                        break
+                    else:
+                        print("enter valid date,it should be more than the current date")
+                        continue
+            except:
+                print("Incorrect data format, should be YYYY-MM-DD")
+                continue
+                    
+obj = Loginconsole_validations()
+obj.fromdate_validation()
+obj.todate_validation()
 
 
 
