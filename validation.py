@@ -166,9 +166,9 @@ class Loginconsole_validations:
                 print("Incorrect data format, should be YYYY-MM-DD")
                 continue
                     
-obj = Loginconsole_validations()
-obj.fromdate_validation()
-obj.todate_validation()
+#obj = Loginconsole_validations()
+#obj.fromdate_validation()
+#obj.todate_validation()
 
 
 

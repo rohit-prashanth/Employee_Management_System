@@ -57,4 +57,4 @@ class Database:
 # column2 = {'first_name':'sample','last_name':'123','username':'lol','email_id':'sample','password':'123456','emp_salary':10000,'emp_pf_no':12355,'join_Date':'03-02-2021','pan_no':'ADGJ4568','leave_balance':2}  
 # column3 = {'first_name':'sample','last_name':'123','username':'vinod','email_id':'sample','password':'123456','emp_salary':10000,'emp_pf_no':12355,'join_Date':'03-02-2021','pan_no':'ADGJ4568','leave_balance':2}  
 #obj = Database()
-#obj.particular_col_details("Emp_Creation_Table",'vinod7967','email_id')
+#print(obj.particular_col_details("Emp_Creation_Table",'vinod7967','email_id'))
