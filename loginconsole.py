@@ -15,13 +15,16 @@ class LoginConsole:
         
     def change_password(emp_username):
         pwd= input("enter the password")
-        p=checkvalidate('Emp_Creation_Table',emp_username,'password',pwd)
-        
+        p=particular_col_details('Emp_Creation_Table',emp_username,'password',pwd)
         New_pwd=input("enter new pwd")
-        confirm_pwd=input("enter new pwd")
-        pd=emp_passwordvalidation(New_pwd)
-        update_table('Emp_Creation_Table',emp_username,'password',pd)
-        
+        if pwd==p:
+            if New_pwd==confirm_pwd:
+                update_table('Emp_Creation_Table',emp_username,'password',pd)
+            else:
+                print("new password entered doesnot match with confirm password")
+        else:
+            print("enter valid input")
+            
     def request_leave(self):
 
         print("leave request for employee")
