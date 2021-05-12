@@ -4,115 +4,74 @@ from data_base import Database
 import getpass
 from string import punctuation
 #Database().FUNCTION NAME
-
-class Validation:
-
-    def emp_emailvalidation(self):
+from tkinter import *
+from tkinter import messagebox
+def emp_emailvalidation(var):
         # ref='^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,20}$'
         ref = '\w[a-z_.]\D*@ojas-it[.]com'
-        while True:
-            email = input("enter ur email::-")
-            re.search(ref,email)
-            if re.search(ref,email):
-                return email
-                break
-            else:
-                print("invalid email")
-                continue
-
-    def emp_useridvalidation(self):
+        if not (re.search(ref,var)):
+            messagebox.showwarning('emailid','enter valid mail')
+        else:
+            return True
+def emp_useridvalidation(var):
         db = Database().read_table('Emp_Creation_Table')
         # usinpt=input("enter userid")
         lst = []
         for i in db:
             lst.append(i[2])
-        while True:
-            usinpt = input("enter userid")
-            for i in lst:
-                if i == usinpt:
-                    print("unique id")
-                    continue
+        if var in lst:
+            messagebox.showwarning('userid','entered different id')
+        else:
+            return True
+def emp_usernamevalidation(inpt,inpt1):
+            if not (inpt.isalpha() and inpt1.isalpha()):
+                messagebox.showwarning('username','The first name entered is incorrect')
             else:
-                return usinpt
-                break
-    def emp_usernamevalidation(self):
-        while True:
-            inpt = input("enter ur firstname::-")
-            inpt1 = input("enter ur last name::-")
-            if inpt.isalpha() and inpt1.isalpha():
-                return inpt, inpt1
-                break
-            else:
-                print("invalid username")
-                continue
-
-    def emp_passwordvalidation(self):
-        while True:
-            password = input("enter u r password::-")
-            if ' ' in password:
-                print( 'there is a space in password')
-                continue
-
-            if len(password) not in range(8,17):
-                print('password should between in min 8 & max 16 characters')
-                continue
-
-            special_chars=[True for x in password if x in punctuation]
+                return True
+def emp_passwordvalidation(var):
+            if ' ' in var:
+                messagebox.showwarning('password','there is a space in password')
+            if len(var) not in range(8,17):
+                messagebox.showwarning('password','password should between in min 8 & max 16 characters')
+            special_chars=[True for x in var if x in punctuation]
             if len(special_chars)==0:
-                print( 'your password should have one special character')
-                continue
-
-            nums=any(x.isdigit() for x in password)
+                messagebox.showwarning('password','your password should have one special character')
+            nums=any(x.isdigit() for x in var)
             if not  nums:
-                print( "you should have atleast 1 digit in your password")
-                continue
-
+                messagebox.showwarning('password','you should have atleast 1 digit in your password')
             else:
-                return password
-                break
-
-    def emp_salaryvalidation(self):
-        while True:
+                return True
+def emp_salaryvalidation(var):
             try:
-                salary = float(input("enter salary"))
-                if salary:
-                    return salary
+                if float(var):
+                    return True
             except:
-                print("enter valid salary ")
-                continue
-    def emp_pfno_validation(self):
-        while True:
-            pfno=input("enter pf no")
-            if pfno.isalpha():
-                continue
-            if pfno.isnumeric():
-                continue
-            if pfno.isalnum():
-                return pfno
+                messagebox.showwarning('salary','enter valid salary')
+def emp_pfno_validation(var):
+            if var.isalpha():
+                messagebox.showwarning('pfno','it has only alphabets')
+            if var.isnumeric():
+                messagebox.showwarning('pfno','it has only numarics')
+            if var.isalnum():
+                return True
             else:
-                continue
-    def date_validation(self):
-        while True:
-            date_string = input("enter date in YYYY-MM-DD format")
+                messagebox.showwarning('pfno','it has another characters')
+def date_validation(var):
             format = "%Y-%m-%d"
             try:
-                if datetime.datetime.strptime(date_string, format):
-                    return datetime.datetime.strptime(date_string, format)
-                    break
+                if datetime.datetime.strptime(var, format):
+                    return True
             except:
-                print("Incorrect data format, should be YYYY-MM-DD")
-                continue
-    def panid_validation(self):
-        while True:
-            pfno=input("enter pan no")
-            if pfno.isalpha():
-                continue
-            if pfno.isnumeric():
-                continue
-            if pfno.isalnum():
-                return pfno
+                messagebox.showwarning('joindate','it must be in YYYY-MM-DD')
+def panid_validation(var):
+            if var.isalpha():
+                messagebox.showwarning('pfno','it has only alphabets')
+            if var.isnumeric():
+                messagebox.showwarning('pfno','it has only numarics')
+            if var.isalnum():
+                return True
             else:
-                continue
+                messagebox.showwarning('pfno','it has another characters')
 class Loginconsole_validations:
     def username_validation(self):
         while True:
@@ -165,8 +124,7 @@ class Loginconsole_validations:
             except:
                 print("Incorrect data format, should be YYYY-MM-DD")
                 continue
-                    
-#obj = Loginconsole_validations()
+#print(emp_emailvalidation("uday@ojas-it.com"))
 #obj.fromdate_validation()
 #obj.todate_validation()
 

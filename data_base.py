@@ -52,7 +52,7 @@ class Database:
         cur.execute(query)
         conn.commit()
         return cur.fetchall()
-
+obj=Database()
 # column1 = {'username':'lol','from_date':'05-04-2021','to_date':'07-04-2021','no_of_days':'2','approval':'Pending'}  
 # column2 = {'first_name':'sample','last_name':'123','username':'lol','email_id':'sample','password':'123456','emp_salary':10000,'emp_pf_no':12355,'join_Date':'03-02-2021','pan_no':'ADGJ4568','leave_balance':2}  
 # column3 = {'first_name':'sample','last_name':'123','username':'vinod','email_id':'sample','password':'123456','emp_salary':10000,'emp_pf_no':12355,'join_Date':'03-02-2021','pan_no':'ADGJ4568','leave_balance':2}  

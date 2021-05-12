@@ -1,11 +1,12 @@
 from data_base import Database
-from validation import Validation
+from validation import *
 class Adminconsole:
     def create_emp_account(self):
-        self.username=Validation().emp_usernamevalidation()
-        self.userid=Validation().emp_useridvalidation()
-        self.email_id=Validation().emp_emailvalidation()
-        self.password=Validation().emp_passwordvalidation()
+        #self.username=Validation().emp_usernamevalidation()
+        #self.userid=Validation().emp_useridvalidation()
+        x=emp_emailvalidation("vinod@ojas-it.com")
+        print(x)
+        """self.password=Validation().emp_passwordvalidation()
         self.emp_salary=Validation().emp_salaryvalidation()
         self.emp_pf_no=Validation().emp_pfno_validation()
         self.join_date=Validation().date_validation()
@@ -28,9 +29,9 @@ class Adminconsole:
         Database().update_table("Leave_Request_Table",self.username,'status',self.status)
     def emp_account_del(self):
         del_row=input("enter username to delete")
-        Database().delete_row("emp_creation_table",del_row)
+        Database().delete_row("emp_creation_table",del_row)"""
 obj=Adminconsole()
-#obj.create_emp_account()
+obj.create_emp_account()
 #obj.emp_account_del()
-obj.list_emp_details()
+#obj.list_emp_details()
 #obj.emp_leave_request()

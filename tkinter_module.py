@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from data_base import Database
+from validation import *
 def home_console():
                 root = Tk()
                 root.title("Admin Console")
@@ -15,15 +16,22 @@ def home_console():
 def adminvalidation():
                 username = user_entry.get()
                 password = pass_entry.get()
-                if username == 'username' and password == 'password':
+                if username == 'root' and password == 'root':
                     adminconsole()
                 else:
                     messagebox.showwarning('Login Page', 'The username or password you entered is incorrect')
 def employeevalidation():
                 username = user_entry.get()
                 password = pass_entry.get()
-                if username == 'abhi123' and password == 'Abhi@123':
-                    loginconsole()
+                data=Database().read_table("emp_creation_table")
+                dic={}
+                for i in data:
+                    dic[i[2]]=i[4]
+                if username in dic.keys():
+                    if password == dic[username]:
+                        loginconsole()
+                    else:
+                        messagebox.showwarning('Login Page', 'The username or password you entered is incorrect')
                 else:
                     messagebox.showwarning('Login Page', 'The username or password you entered is incorrect')
 def adminconsole():
@@ -31,7 +39,7 @@ def adminconsole():
                     root.title("Admin Console")
                     button = Button(root, text = 'Create Employee Account',command=create_employee_page)
                     button.grid(row=2, column=0, columnspan=2)
-                    button = Button(root, text = 'List Employee Details',command=list_emp_details_page)
+                    button = Button(root, text = 'List Employee Details',command=admin_list_emp_details_page)
                     button.grid(row=4, column=0, columnspan=2)
                     button = Button(root, text = 'Employee Leave Requests',command=admin_emp_leave_request_page)
                     button.grid(row=6, column=0, columnspan=2)
@@ -54,7 +62,7 @@ def Adminlogin():
             Label(root, text='Username').grid(row=0)
             Label(root, text='Password').grid(row=1)
             user_entry = Entry(root)
-            pass_entry = Entry(root)
+            pass_entry = Entry(root,show="*")
             user_entry.grid(row=0, column=1)
             pass_entry.grid(row=1, column=1)
             button = Button(root, text = 'submit',command=adminvalidation)
@@ -66,7 +74,7 @@ def Employeelogin():
             Label(root, text='Username').grid(row=0)
             Label(root, text='Password').grid(row=1)
             user_entry = Entry(root)
-            pass_entry = Entry(root)
+            pass_entry = Entry(root,show="*")
             user_entry.grid(row=0, column=1)
             pass_entry.grid(row=1, column=1)
             button = Button(root, text = 'submit',command=employeevalidation)
@@ -75,20 +83,30 @@ def Employeelogin():
 def create_employee_database():
     firstname=firstname_entry.get()
     lastname=lastname_entry.get()
+    a1=emp_usernamevalidation(firstname,lastname)
     username=userid_entry.get()
+    a2=emp_useridvalidation(username)
     email_id=emailid_entry.get()
+    a3=emp_emailvalidation(email_id)
     password=password_entry.get()
+    a4=emp_passwordvalidation(password)
     emp_salary=salary_entry.get()
+    a5=emp_salaryvalidation(emp_salary)
     emp_pf_no=pfno_entry.get()
+    a6=emp_pfno_validation(emp_pf_no)
     join_Date=joindate_entry.get()
+    a8=date_validation(join_Date)
     pan_no=panid_entry.get()
+    a7=emp_pfno_validation(pan_no)
     dic={"first_name":firstname,"last_name":lastname,"username":username,"email_id":email_id,"password":password,
              "emp_salary":emp_salary,"emp_pf_no":emp_pf_no,"join_Date":join_Date,"pan_no":pan_no,"leave_balance":6}
     Database().insert_row("Emp_Creation_Table",dic)
     root = Tk()
     root.title("employee creation")
     root.geometry("400x300")
-    my_label = Label(root, text="employee details are created ").pack()
+    if (a1==True) and (a2==True) and (a3==True) and (a4==True) and (a5==True) and (a6==True) and (a7==True) and (a8==True):
+        my_label = Label(root, text="employee details are created ").pack()
+        
 def create_employee_page():
             global firstname_entry,lastname_entry,userid_entry,emailid_entry,password_entry,salary_entry,pfno_entry,joindate_entry,panid_entry
             root = Tk(className = 'employee creation page')
