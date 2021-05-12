@@ -1,6 +1,6 @@
 import datetime
 import re
-from data_base import Database
+from data_base import *
 import getpass
 from string import punctuation
 #Database().FUNCTION NAME
@@ -72,8 +72,7 @@ def panid_validation(var):
                 return True
             else:
                 messagebox.showwarning('pfno','it has another characters')
-class Loginconsole_validations:
-    def username_validation(self):
+def username_validation(self):
         while True:
             username=input("enter username")
             password=input("enter password")
@@ -89,27 +88,21 @@ class Loginconsole_validations:
                     continue
             else:
                 print("entered credentials are wrong")
-    def fromdate_validation(self):
+def fromdate_validation(var):
         global from_date
         from_date=""
-        while True:
-            date_string = input("enter from date in YYYY-MM-DD format")
-            format = "%Y-%m-%d"
-            date=datetime.datetime.now()
-            try:
-                if datetime.datetime.strptime(date_string, format):
-                    if str(datetime.datetime.strptime(date_string, format))[0:10]>=str(date)[0:10]:
-                        from_date=from_date+str(datetime.datetime.strptime(date_string, format))
-                        return datetime.datetime.strptime(date_string, format)
-                        break
+        format = "%Y-%m-%d"
+        date=datetime.datetime.now()
+        try:
+                if datetime.datetime.strptime(var, format):
+                    if str(datetime.datetime.strptime(var, format))[0:10]>=str(date)[0:10]:
+                        from_date=from_date+str(datetime.datetime.strptime(var, format))
+                        return datetime.datetime.strptime(var, format)         
                     else:
-                        print("enter valid date,it should be more than the current date")
-                        continue    
-            except:
-                print("Incorrect data format, should be YYYY-MM-DD")
-                continue
-    
-    def todate_validation(self):
+                        messagebox.showwarning('pfno','enter valid date,it should be more than the current date')
+        except:
+                messagebox.showwarning('pfno','Incorrect data format, should be YYYY-MM-DD')
+def todate_validation(self):
         while True:
             date_string = input("enter to date in YYYY-MM-DD format")
             format = "%Y-%m-%d"

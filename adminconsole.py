@@ -30,8 +30,11 @@ class Adminconsole:
     def emp_account_del(self):
         del_row=input("enter username to delete")
         Database().delete_row("emp_creation_table",del_row)"""
+    def par(self):
+        pas=Database().particular_col_details("Emp_Creation_Table",'username','password')
+        print(pas)
 obj=Adminconsole()
-obj.create_emp_account()
+obj.par()
 #obj.emp_account_del()
 #obj.list_emp_details()
 #obj.emp_leave_request()

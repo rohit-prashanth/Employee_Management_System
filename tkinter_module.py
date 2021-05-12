@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
-from data_base import Database
+from data_base import *
 from validation import *
 def home_console():
                 root = Tk()
@@ -23,7 +23,7 @@ def adminvalidation():
 def employeevalidation():
                 username = user_entry.get()
                 password = pass_entry.get()
-                data=Database().read_table("emp_creation_table")
+                data=read_table("emp_creation_table")
                 dic={}
                 for i in data:
                     dic[i[2]]=i[4]
@@ -34,6 +34,7 @@ def employeevalidation():
                         messagebox.showwarning('Login Page', 'The username or password you entered is incorrect')
                 else:
                     messagebox.showwarning('Login Page', 'The username or password you entered is incorrect')
+                
 def adminconsole():
                     root = Tk()
                     root.title("Admin Console")
@@ -98,9 +99,10 @@ def create_employee_database():
     a8=date_validation(join_Date)
     pan_no=panid_entry.get()
     a7=emp_pfno_validation(pan_no)
+
     dic={"first_name":firstname,"last_name":lastname,"username":username,"email_id":email_id,"password":password,
              "emp_salary":emp_salary,"emp_pf_no":emp_pf_no,"join_Date":join_Date,"pan_no":pan_no,"leave_balance":6}
-    Database().insert_row("Emp_Creation_Table",dic)
+    insert_row("Emp_Creation_Table",dic)
     root = Tk()
     root.title("employee creation")
     root.geometry("400x300")
@@ -157,7 +159,7 @@ def admin_list_emp_details():
     list=["first_name","last_name","username","email_id","password",
              "emp_salary","emp_pf_no","join_Date","pan_no","leave_balance"]
     if username:
-        Data_dic=Database().read_table("emp_creation_table",username)
+        Data_dic=read_table("emp_creation_table",username)
         root = Tk()
         root.title("employee datails")
         root.geometry("400x300")
@@ -165,7 +167,7 @@ def admin_list_emp_details():
         for i in range(len(list)):
             my_label = Label(root, text=f"{list[i]} : {Data_dic[0][i]}").pack()
     else:
-        all_emp_details=Database().read_table("emp_creation_table")
+        all_emp_details=read_table("emp_creation_table")
         root = Tk()
         root.title("employee datails")
         root.geometry("400x300")
@@ -189,14 +191,14 @@ def admin_emp_leave_request_page():
 def admin_emp_leave_request():
     username=user_name_entry.get()
     status=status_entry.get()
-    Database().update_table("Leave_Request_Table",username,'status',status)
+    update_table("Leave_Request_Table",username,'status',status)
     root = Tk()
     root.title("leave request")
     root.geometry("400x300")
     my_label = Label(root, text="employee leave request is updated").pack()
 def admin_emp_deletion():
     user=username_delete_entry.get()
-    Database().delete_row("emp_creation_table",user)
+    delete_row("emp_creation_table",user)
     root = Tk()
     root.title("employee deletion")
     root.geometry("400x300")
@@ -212,7 +214,7 @@ def admin_emp_account_del_page():
                 root.mainloop()
 def login_emp_details():
                 user=search_username_entry.get()
-                Data=Database().read_table('Emp_Creation_Table',username = user)
+                Data=read_table('Emp_Creation_Table',username = user)
                 Data_dic={'first_name':Data[0][0],'last_name':Data[0][1],'username':Data[0][2],'join_date':Data[0][7]}
                 root = Tk()
                 root.title("employee datails")
@@ -236,11 +238,18 @@ def employee_updated_password():
     curent_password=current_password_entry.get()
     new_password=new_password_entry.get()
     confirm_password=confirm_password_entry.get()
-    Database().update_table('Emp_Creation_Table',username,'password',new_password)
-    root = Tk()
-    root.title("employee change password")
-    root.geometry("400x300")
-    my_label = Label(root,text="password is updated ").pack()
+    pas=particular_col_details("Emp_Creation_Table",username,'password')[0][0]
+    if pas == curent_password:
+        if new_password == confirm_password:
+            update_table('Emp_Creation_Table',username,'password',new_password)
+            root = Tk()
+            root.title("employee change password")
+            root.geometry("400x300")
+            my_label = Label(root,text="password is updated ").pack()
+        else:
+            messagebox.showwarning('password','new_password not same as confirm_password')
+    else:
+        messagebox.showwarning('password','wrong current password')
 def employee_change_password_page():
     global current_password_entry,new_password_entry,confirm_password_entry
     root = Tk(className = 'password change')
@@ -263,9 +272,10 @@ def employee_leave_request():
     username=user_entry.get()
     fromdate=fromdate_entry.get()
     todate=to_entry.get()
-    leave_balance=Database().particular_col_details('emp_creation_table','username','leave_balance')
-    dic={"username":username,"from_date":fromdate,"to_date":todate,"no_of_days":10,"leave_balance":leave_balance,"status":"pending"}
-    Database().insert_row("Leave_Request_Table",dic)
+    no_of_days=fromdate-todate
+    leave_balance=6
+    dic={"username":username,"from_date":fromdate,"to_date":todate,"no_of_days":no_of_days,"leave_balance":leave_balance,"status":"pending"}
+    insert_row("Leave_Request_Table",dic)
     root = Tk()
     root.title("employee leave request")
     root.geometry("400x300")
